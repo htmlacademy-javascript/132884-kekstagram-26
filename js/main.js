@@ -1,55 +1,106 @@
-/* Функция возвращающая случайное цело число из переданного диапазона с проверками */
-const isNumber = (randomNumber) => typeof randomNumber === 'number' || Number.isFinite(randomNumber) || !isNaN(randomNumber);
-
-const returnRandomNumber = (min, max) => {
-  if (max <= min) {
-    [min, max] = [max, min];
-  }
-  if (!isNumber(min) || !isNumber(max)) {
-    throw new TypeError('Params not right');
-  }
-  let randomNumber = Math.random() * -(max - min) + max;
-  /* Если число отрицательное, то заносим результат в модуль Math.abs и возвращаем положительным */
-  if (randomNumber < 0) {
-    randomNumber = Math.abs(randomNumber);
-  }
-  if (!isNumber(randomNumber)) {
-    throw new TypeError('Params not right');
-  }
-  return Math.round(randomNumber);
-};
-
-returnRandomNumber(0, 30);
-//console.log(returnRandomNumber([2], [5]));
-
-/* Функция, возвращающая случайное целое число из переданного диапазона включительно.
-диапазон может быть только положительный, включая ноль.
-А также придумайте, как функция должна вести себя, если передать значение «до» меньшее, чем значение «от», или равное ему.
+/*
+  В файле main.js на основе написанных по заданию ранее вспомогательных функций напишите необходимые функции для создания массива из 25 сгенерированных объектов. Каждый объект массива — описание фотографии, опубликованной пользователем.
 */
 
-function getRandomIntInclusive(min, max) {
-  if (min < 0 || max < 0) {
-    return 'Error';
-  }
+const NAMES = [
+  'Константин',
+  'Олег',
+  'Михаил',
+  'Александра',
+  'Соня',
+  'Егор',
+  'Дмитрий',
+  'Яна',
+  'Ксения',
+  'Юлия',
+  'Злата',
+  'Сергей',
+  'Виталий',
+  'Ольга',
+  'Роман',
+  'Олег',
+  'Глеб',
+  'Марина',
+  'Ирина',
+  'Ева',
+  'Алиса',
+  'Анелина',
+  'Алина',
+  'Арина',
+  'Инга',
+];
 
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
-}
-getRandomIntInclusive(3, 8);
-//console.log(getRandomIntInclusive(2, 8));
+const SURNAMES = [
+  'Смирнов',
+  'Новиков',
+  'Петров',
+  'Максимова',
+  'Гаврилова',
+  'Ершов',
+  'Исаев',
+  'Осипова',
+  'Третьякова',
+  'Евдокимова',
+  'Аксёнов',
+  'Николаев',
+  'Моисеев',
+  'Лапина',
+  'Дьячков',
+  'Фролов',
+  'Одинцов',
+  'Трофимова',
+  'Нестерова',
+  'Филатова',
+  'Авдеева',
+  'Антонова',
+  'Назарова',
+  'Белова',
+  'Селезнёва',
+];
+
+const MESSAGE = [
+  'Всё отлично!',
+  'В целом всё неплохо. Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+];
+
+const GENERATED_OBJECT = 25;
+
+const getRandomPositiveInteger = (min, max) => {
+  const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+  const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
+
+//const checkStringLength = (string, length) => string.length <= length;
+
+const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+
+const createRandomObject = () => ({
+  name: `${getRandomArrayElement(NAMES)  } ${  getRandomArrayElement(SURNAMES)  } ${  getRandomArrayElement(MESSAGE)}`,
+});
+
+const generateRandomObject = Array.from({length: GENERATED_OBJECT}, createRandomObject);
+
+//console.log(generateRandomObject);
 
 /*
-  Функция для проверки максимальной длины строки.
-  Будет использоваться для проверки длины введённого комментария, но должна быть универсальна.
-*/
-
-const maxSrtLength = (str, maxLength) => {
-  if (typeof str !== 'string') {
-    throw new TypeError('Не строка');
-  }
-
-  return str.length <= maxLength;
+const myObject = {
+  id: 1,
+  url: 'photos/{{photo-1}}.jpg',
+  description: 'photo1',
+  likes: 2,
+  comments: [
+    {
+      id: 135,
+      avatar: 'img/avatar-6.svg',
+      message: 'В целом всё неплохо. Но не всё.',
+      name: 'Артём',
+    }
+  ]
 };
-maxSrtLength('large string', 50);
-//console.log(maxSrtLength('large string', 50));
+*/
