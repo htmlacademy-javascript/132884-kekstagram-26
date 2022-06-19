@@ -108,4 +108,5 @@ const getPhotoCard = () => {
 const getPhotoCards = () => Array.from({length: PHOTO_COUNT}, getPhotoCard);
 const generateRandomObject = getPhotoCards();
 
+//module4-task1
 //console.log(generateRandomObject);
