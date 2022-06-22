@@ -9,11 +9,22 @@ const getRandomPositiveInteger = (min, max) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
+/*class makeRandomGenerator {
+  constructor(length) {
+    this.array = Array.from({length}, (_, index) => index + 1);
+  }
+
+  next() {
+    return this.array.splice(getRandomPositiveInteger(0, this.array.length - 1), 1).shift();
+  }
+}
+
+const generator = new makeRandomGenerator(25);
+generator.next();*/
+
 const makeRandomGenerator = (...length) => {
   const array = Array.from({length}, (_, index) => index + 1);
   return () => array.splice(getRandomPositiveInteger(0, array.length - 1), 1).shift();
 };
 
-export {getRandomPositiveInteger};
-export {getRandomArrayElement};
-export {makeRandomGenerator};
+export {getRandomPositiveInteger, getRandomArrayElement, makeRandomGenerator};

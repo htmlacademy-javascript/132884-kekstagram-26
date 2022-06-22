@@ -1,6 +1,4 @@
-import {getRandomPositiveInteger} from './util.js';
-import {getRandomArrayElement} from './util.js';
-import {makeRandomGenerator} from './util.js';
+import {getRandomPositiveInteger, getRandomArrayElement, makeRandomGenerator} from './util.js';
 import {NAMES, SURNAMES, MESSAGE, MAX_COMMENTS_COUNT, MIN_COMMENTS_COUNT, MAX_LIKES_COUNT, PHOTO_COUNT} from './constants.js';
 
 const getCommentId = makeRandomGenerator(PHOTO_COUNT * MAX_COMMENTS_COUNT);
@@ -26,5 +24,4 @@ const getPhotoCard = () => {
 
 const getPhotoCards = () => Array.from({length: PHOTO_COUNT}, getPhotoCard);
 
-const generateRandomObject = getPhotoCards();
-//console.log(generateRandomObject);
+export {getPhotoCards,};
