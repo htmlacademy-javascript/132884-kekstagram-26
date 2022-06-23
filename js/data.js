@@ -24,4 +24,4 @@ const getPhotoCard = () => {
 
 const getPhotoCards = () => Array.from({length: PHOTO_COUNT}, getPhotoCard);
 
-export {getPhotoCards,};
+export {getPhotoCards};
