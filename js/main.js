@@ -1,10 +1,10 @@
 import {getPhotoCards} from './data.js';
-import {generator} from './data.js';
+import {generator} from './util.js';
 
 getPhotoCards();
-//generator.next();
-const generatorNext = generator.next();
-
 //const generateRandomObject = getPhotoCards();
+generator.next();
+
+
 //console.log(generateRandomObject);
-console.log(generatorNext);
+//console.log({generator});
