@@ -5,6 +5,4 @@ getPhotoCards();
 //const generateRandomObject = getPhotoCards();
 generator.next();
 
-
 //console.log(generateRandomObject);
-//console.log({generator});

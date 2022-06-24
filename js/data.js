@@ -1,21 +1,22 @@
-import {getRandomPositiveInteger, getRandomArrayElement, generator} from './util.js';
+import {getRandomPositiveInteger, getRandomArrayElement, RandomGenerator} from './util.js';
 import {NAMES, SURNAMES, MESSAGE, MAX_COMMENTS_COUNT, MIN_COMMENTS_COUNT, MAX_LIKES_COUNT, PHOTO_COUNT} from './constants.js';
 
-const getCommentId = generator(PHOTO_COUNT * MAX_COMMENTS_COUNT);
+const commentIdGenerator = new RandomGenerator(PHOTO_COUNT * MAX_COMMENTS_COUNT);
 const getComment = (avatarId) => ({
-  id: getCommentId(),
+  id: commentIdGenerator.next(),
   avatar: `img/avatar-${avatarId}.svg`,
   message: getRandomArrayElement(MESSAGE),
   name: `${getRandomArrayElement(NAMES)} ${getRandomArrayElement(SURNAMES)}`,
 });
 
-const getPhotoCardId = generator(PHOTO_COUNT);
-const getPhotoId = generator(PHOTO_COUNT);
+const photoCardIdGenerator = new RandomGenerator(PHOTO_COUNT);
+const photoIdGenerator = new RandomGenerator(PHOTO_COUNT);
 const getPhotoCard = () => {
-  const getAvatar = generator(6);
+  const avatarIdGenerator = new RandomGenerator(6);
+  const getAvatar = () => avatarIdGenerator.next();
   return {
-    id: getPhotoCardId(),
-    url: `photos/photo-${getPhotoId(0, 25)}.jpg`,
+    id: photoCardIdGenerator.next(),
+    url: `photos/photo-${photoIdGenerator.next()}.jpg`,
     description: `description ${getRandomPositiveInteger(0, MAX_LIKES_COUNT)}`,
     likes: getRandomPositiveInteger(0, MAX_LIKES_COUNT),
     comments: Array.from({length: getRandomPositiveInteger(MIN_COMMENTS_COUNT, MAX_COMMENTS_COUNT)}, () => getComment(getAvatar())),
