@@ -1,3 +1,8 @@
-import './util.js'; //модуль с вспомогательными функциями
-import './data.js'; //модуль, который создаёт данные.
-import './constants.js'; //Константы.
+import {getPhotoCards} from './data.js';
+import {generator} from './util.js';
+
+getPhotoCards();
+//const generateRandomObject = getPhotoCards();
+generator.next();
+
+//console.log(generateRandomObject);
