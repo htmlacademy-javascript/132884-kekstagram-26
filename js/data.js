@@ -16,7 +16,7 @@ const getPhotoCard = () => {
   const getAvatar = () => avatarIdGenerator.next();
   return {
     id: photoCardIdGenerator.next(),
-    url: `photos/photo-${photoIdGenerator.next()}.jpg`,
+    url: `photos/${photoIdGenerator.next()}.jpg`,
     description: `description ${getRandomPositiveInteger(0, MAX_LIKES_COUNT)}`,
     likes: getRandomPositiveInteger(0, MAX_LIKES_COUNT),
     comments: Array.from({length: getRandomPositiveInteger(MIN_COMMENTS_COUNT, MAX_COMMENTS_COUNT)}, () => getComment(getAvatar())),
