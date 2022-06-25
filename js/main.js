@@ -1,4 +1,5 @@
 import {getPhotoCards} from './data.js';
+import {drawPictures} from './pictures-miniatures.js';
 
-getPhotoCards();
-//console.log(getPhotoCards());
+const cards = getPhotoCards();
+drawPictures(cards);
