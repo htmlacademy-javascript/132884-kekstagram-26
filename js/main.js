@@ -3,3 +3,4 @@ import {drawPictures} from './pictures-miniatures.js';
 
 const cards = getPhotoCards();
 drawPictures(cards);
+

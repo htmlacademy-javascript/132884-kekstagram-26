@@ -1,3 +1,5 @@
+import {showBigPicture} from './pictures-bigger.js';
+
 const pictureTemplate = document.querySelector('#picture').content;
 const picturesContainer = document.querySelector('.pictures');
 
@@ -7,6 +9,8 @@ const createPicture = (item) => {
   pictureElement.querySelector('.picture__img').src = item.url;
   pictureElement.querySelector('.picture__comments').textContent = item.comments.length;
   pictureElement.querySelector('.picture__likes').textContent = item.likes;
+
+  pictureElement.addEventListener('click', () => showBigPicture(item));
 
   return pictureElement;
 };
