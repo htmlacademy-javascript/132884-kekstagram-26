@@ -1,12 +1,12 @@
 const bigPictureElement = document.querySelector('.big-picture');
-const minPictureElement = document.querySelectorAll('.picture');
-const closedBigPicture = document.querySelector('.cancel');
+const closedBigPicture = document.querySelector('.big-picture__cancel');
 
-const showBigPicture = () => {
-  minPictureElement.addEventListener('click', (evt) => {
-    evt.preventDefault();
+const showBigPicture = (item) => {
+  bigPictureElement.querySelector('.big-picture__img').src = item.url;
+  bigPictureElement.classList.toggle('hidden');
+
+  closedBigPicture.addEventListener('click', () => {
     bigPictureElement.classList.toggle('hidden');
-    closedBigPicture.classList.toggle('hidden');
   });
 };
 
