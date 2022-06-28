@@ -1,6 +1,6 @@
 import {showBigPicture} from './pictures-bigger.js';
 
-const pictureTemplate = document.querySelector('#picture').content;
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 
 const createPicture = (item) => {
@@ -27,9 +27,9 @@ const createPictures = (items) => {
 
 const drawPictures = (items) => {
   picturesContainer.append(createPictures(items));
-  picturesContainer.querySelectorAll('.picture').forEach((item, index, pictures) => {
+  /*picturesContainer.querySelectorAll('.picture').forEach((item, index, pictures) => {
     pictures[index].addEventListener('click', () => showBigPicture(item));
-  });
+  });*/
 };
 
 export {drawPictures};
