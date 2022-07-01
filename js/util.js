@@ -19,11 +19,4 @@ class RandomGenerator {
   }
 }
 
-const generator = new RandomGenerator(25);
-
-/*const makeRandomGenerator = (...length) => {
-  const array = Array.from({length}, (_, index) => index + 1);
-  return () => array.splice(getRandomPositiveInteger(0, array.length - 1), 1).shift();
-};*/
-
-export {getRandomPositiveInteger, getRandomArrayElement, RandomGenerator, generator};
+export {getRandomPositiveInteger, getRandomArrayElement, RandomGenerator};
