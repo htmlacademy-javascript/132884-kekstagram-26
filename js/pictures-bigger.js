@@ -9,9 +9,6 @@ const socialComent = bigPictureElement.querySelector('.social__comment').cloneNo
 const comentsCount = bigPictureElement.querySelector('.comments-count');
 const socialCaption = bigPictureElement.querySelector('.social__caption');
 
-//comentsCount.querySelector('.comments-count') = textContent = item.comments.length(5);
-//socialCaption.querySelector('..social__caption') = textContent = item.description;
-
 const clearComments = () => {
   socialComents.innerHTML = '';
 };
@@ -40,10 +37,17 @@ const replaceComments = (comments) => {
   comentsCount.textContent = comments.length;
 };
 
+const close = () => {
+  bigPictureElement.classList.add('hidden');
+  document.body.removeEventListener('keydown', addEscapeCloseHandler);
+  document.body.style.overflow = 'auto';
+};
+
 const showBigPicture = (item) => {
   bigPictureElement.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
 
+  addEscapeCloseHandler();
   replaceComments(item.comments);
 
   bigImage.src = item.url;
@@ -51,28 +55,16 @@ const showBigPicture = (item) => {
   socialCaption.textContent = item.description;
 
   closedBigPicture.addEventListener('click', () => {
-    bigPictureElement.classList.add('hidden');
-    document.body.style.overflow = 'auto';
+    close();
   }, {once: true});
 };
 
-/*const close = () => {
-  bigPictureElement.classList.add('hidden');
-  document.body.removeEventListener('keydown', addEscapeCloseHandler);
-};
-
 function addEscapeCloseHandler () {
-  document.body.addEvantListener('keydown', (evt) => {
+  document.body.addEventListener('keydown', (evt) => {
     if(evt.key === 'Escape') {
       close();
     }
   });
-}*/
-
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    bigPictureElement.classList.add('hidden');
-  }
-});
+}
 
 export {showBigPicture};
