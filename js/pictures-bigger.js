@@ -1,5 +1,6 @@
+import {initPopup} from './popup.js';
+
 const bigPictureElement = document.querySelector('.big-picture');
-const closedBigPicture = document.querySelector('.big-picture__cancel');
 
 const bigImage = bigPictureElement.querySelector('.big-picture__img img');
 const likesCount = bigPictureElement.querySelector('.likes-count');
@@ -37,34 +38,15 @@ const replaceComments = (comments) => {
   comentsCount.textContent = comments.length;
 };
 
-const close = () => {
-  bigPictureElement.classList.add('hidden');
-  document.body.removeEventListener('keydown', addEscapeCloseHandler);
-  document.body.style.overflow = 'auto';
-};
+const {openPopup} = initPopup(bigPictureElement);
 
 const showBigPicture = (item) => {
-  bigPictureElement.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-
-  addEscapeCloseHandler();
+  openPopup();
   replaceComments(item.comments);
 
   bigImage.src = item.url;
   likesCount.textContent = item.likes;
   socialCaption.textContent = item.description;
-
-  closedBigPicture.addEventListener('click', () => {
-    close();
-  }, {once: true});
 };
-
-function addEscapeCloseHandler () {
-  document.body.addEventListener('keydown', (evt) => {
-    if(evt.key === 'Escape') {
-      close();
-    }
-  });
-}
 
 export {showBigPicture};

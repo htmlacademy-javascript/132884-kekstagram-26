@@ -27,9 +27,6 @@ const createPictures = (items) => {
 
 const drawPictures = (items) => {
   picturesContainer.append(createPictures(items));
-  /*picturesContainer.querySelectorAll('.picture').forEach((item, index, pictures) => {
-    pictures[index].addEventListener('click', () => showBigPicture(item));
-  });*/
 };
 
 export {drawPictures};
