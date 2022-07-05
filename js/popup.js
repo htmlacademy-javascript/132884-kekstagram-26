@@ -28,7 +28,7 @@ export const initPopup = (element, closeSelector = '.cancel', hiddenClass = 'hid
   }
 
   function escapeCloseHandler (evt) {
-    evt.preventDefault();
+    //evt.preventDefault();
     if(evt.key === 'Escape') {
       closePopup();
     }
