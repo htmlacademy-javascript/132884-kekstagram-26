@@ -2,19 +2,21 @@ import {initPopup} from './popup.js';
 
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
-const textHashtags = document.querySelector('.text__hashtags');
+const textHashtags = form.querySelector('.text__hashtags');
+const textDescription = form.querySelector('.text__description');
+const uploadInput = document.querySelector('#upload-file');
 
-const socialCommentCount = document.querySelector('.social__comment-count');
-const commentsLoader = document.querySelector('.comments-loader');
-
-socialCommentCount.classList.remove('.hidden'); //Покажите блоки счётчика комментариев
-commentsLoader.classList.remove('.hidden'); // Загрузки новых комментариев
-
-const {openPopup} = initPopup(uploadOverlayElement);
+const {openPopup} = initPopup(uploadOverlayElement, {
+  onClose: () => {
+    uploadInput.value = '';
+  }
+});
 
 const showUploadForm = () => {
   openPopup();
 };
+
+const hashTagFormat = new RegExp('^#[A-Za-zА-Яа-яËё0-9]{1,19}$');
 
 window.onload = () => {
   const pristine = new Pristine((form), {
@@ -23,20 +25,41 @@ window.onload = () => {
     errorTextClass: 'img-upload__field-wrapper',
   });
 
+  const hashTagErrors = [];
   pristine.addValidator(textHashtags, (value) => {
-    if (value.length && value[0] === value[0].toUpperCase()) {
-      return true;
-    } return false;
-  },
+    hashTagErrors.length = 0;
+    const hashTags = value.split(' ').filter(Boolean);
 
-  'Первый символ должен быть заглавным', 2, false,
-  'Минимальная длина 2 символа', 2, false,
-  'Максимальная длина 21 символ', 2, false); //не выводится 'Максимальная длина 21 символ'
+    const usedHashTags = [];
+    hashTags.forEach((hashTag) => {
+      if (!hashTagFormat.test(hashTag)) {
+        hashTagErrors.push(`Тэг ${hashTag} содержит недопустимые символы или слишком длинный`);
+      }
+      if (usedHashTags.includes(hashTag.toLowerCase())) {
+        hashTagErrors.push(`Тэг ${hashTag} повторяется`);
+      } else {
+        usedHashTags.push(hashTag.toLowerCase());
+      }
+    });
+
+    if (hashTags.length > 5) {
+      hashTagErrors.push('Максимальное количество тэгов 5');
+    }
+
+    return !hashTagErrors.length;
+  }, () => hashTagErrors.join(', '), 2, false);
+
+  pristine.addValidator(textDescription, (value) => value.length <= 140, 'Максимальная длинна 140 символов');
 
   form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    pristine.validate();
+    if (!pristine.validate()) {
+      evt.preventDefault();
+    }
   });
 };
+
+uploadInput.addEventListener('change', () => {
+  showUploadForm();
+});
 
 export {showUploadForm};

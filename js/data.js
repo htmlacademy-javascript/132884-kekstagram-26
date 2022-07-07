@@ -12,8 +12,15 @@ const getComment = (avatarId) => ({
 const photoCardIdGenerator = new RandomGenerator(PHOTO_COUNT);
 const photoIdGenerator = new RandomGenerator(PHOTO_COUNT);
 const getPhotoCard = () => {
-  const avatarIdGenerator = new RandomGenerator(6);
-  const getAvatar = () => avatarIdGenerator.next();
+  let avatarIdGenerator = new RandomGenerator(6);
+  const getAvatar = () => {
+    const nextValue = avatarIdGenerator.next();
+    if (!nextValue) {
+      avatarIdGenerator = new RandomGenerator(6);
+      return getAvatar();
+    }
+    return nextValue;
+  };
   return {
     id: photoCardIdGenerator.next(),
     url: `photos/${photoIdGenerator.next()}.jpg`,

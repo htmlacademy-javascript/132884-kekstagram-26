@@ -1,4 +1,4 @@
-export const initPopup = (element, closeSelector = '.cancel', hiddenClass = 'hidden') => {
+export const initPopup = (element, {closeSelector = '.cancel', hiddenClass = 'hidden', onClose} = {}) => {
   const closeElement = element.querySelector(closeSelector);
 
   const addCloseHandlers = () => {
@@ -21,6 +21,9 @@ export const initPopup = (element, closeSelector = '.cancel', hiddenClass = 'hid
     element.classList.add(hiddenClass);
     document.body.style.overflow = 'hidden';
     removeCloseHandlers();
+    if(onclose) {
+      onClose();
+    }
   };
 
   function closeHandler () {

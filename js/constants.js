@@ -63,8 +63,8 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const MAX_COMMENTS_COUNT = 6;
-const MIN_COMMENTS_COUNT = 3;
+const MAX_COMMENTS_COUNT = 30;
+const MIN_COMMENTS_COUNT = 15;
 const MAX_LIKES_COUNT = 25;
 const PHOTO_COUNT = 25;
 
