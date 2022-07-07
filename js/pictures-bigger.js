@@ -10,6 +10,11 @@ const socialComent = bigPictureElement.querySelector('.social__comment').cloneNo
 const comentsCount = bigPictureElement.querySelector('.comments-count');
 const socialCaption = bigPictureElement.querySelector('.social__caption');
 
+const socialCommentCount = document.querySelector('.social__comment-count');
+const commentsLoader = document.querySelector('.comments-loader');
+
+socialCommentCount.classList.remove('hidden');
+
 const clearComments = () => {
   socialComents.innerHTML = '';
 };
@@ -32,13 +37,35 @@ const createComments = (comments) => {
   return commentElements;
 };
 
+let showNextCommentsPage;
 const replaceComments = (comments) => {
   clearComments();
-  socialComents.appendChild(createComments(comments));
-  comentsCount.textContent = comments.length;
+  const maxCount = comments.length;
+  const onPage = 5;
+  const totalPages = Math.ceil(maxCount / 5);
+  let page = 1;
+
+  commentsLoader.classList.remove('hidden');
+
+  showNextCommentsPage = () => {
+    socialComents.appendChild(createComments(comments.slice((page - 1) * onPage, onPage * page)));
+    socialCommentCount.textContent = `${Math.min(page * onPage, maxCount)} из ${maxCount} коментариев`;
+    page++;
+    if (page > totalPages) {
+      commentsLoader.classList.add('hidden');
+    }
+  };
+  showNextCommentsPage();
+
+  commentsLoader.addEventListener('click', showNextCommentsPage);
+  comentsCount.textContent = maxCount;
 };
 
-const {openPopup} = initPopup(bigPictureElement);
+const {openPopup} = initPopup(bigPictureElement, {
+  onClose: () => {
+    commentsLoader.removeEventListener('click', showNextCommentsPage);
+  }
+});
 
 const showBigPicture = (item) => {
   openPopup();
