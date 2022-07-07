@@ -37,12 +37,5 @@ export const initPopup = (element, {closeSelector = '.cancel', hiddenClass = 'hi
     }
   }
 
-  /*function escapeCloseHandler (evt) {
-    //evt.preventDefault();
-    if(evt.key === 'Escape') {
-      closePopup();
-    }
-  }*/
-
   return {openPopup, closePopup};
 };
