@@ -2,13 +2,14 @@ import './pictures-bigger.js';
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const imgUploadPrewiew = document.querySelector('.img-upload__preview');
+const effectLevelValue = document.querySelector('.effect-level__value');
 const previewEffectsChrome = document.querySelector('.effects__preview--chrome');
 
 previewEffectsChrome.addEventListener('click', () => {
-  imgUploadPrewiew.classList.add('.effects__preview--chrome');
+  imgUploadPrewiew.classList.add('effects__preview--chrome');
 });
 
-previewEffectsChrome.value = 0.1;
+effectLevelValue.value = 0;
 
 noUiSlider.create(sliderElement, {
   range: {
@@ -17,13 +18,17 @@ noUiSlider.create(sliderElement, {
   },
 
   start: 0,
-  step: 1,
+  step: 0.1,
   connect: 'lower',
 });
 
-previewEffectsChrome.addEventListener('change', (evt) => {
-  if (evt.target.click) {
-    sliderElement.noUiSlider.updateOptions({
+sliderElement.noUiSlider.on('update', () => {
+  effectLevelValue.value = sliderElement.noUiSlider.get();
+});
+
+effectLevelValue.addEventListener('change', (evt) => {
+  if (evt.target) {
+    previewEffectsChrome.noUiSlider.updateOptions({
       range: {
         min: 1,
         max: 10,
@@ -31,12 +36,12 @@ previewEffectsChrome.addEventListener('change', (evt) => {
       step: 0.1,
     });
   } else {
-    sliderElement.noUiSlider.updateOptions({
+    previewEffectsChrome.noUiSlider.updateOptions({
       range: {
         min: 0,
         max: 100,
       },
-      step: 1,
+      step: 0.1,
     });
   }
 });
