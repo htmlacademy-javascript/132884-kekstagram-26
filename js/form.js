@@ -1,3 +1,4 @@
+import {resetEffects} from './effects.js';
 import {initPopup} from './popup.js';
 
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
@@ -6,9 +7,16 @@ const textHashtags = form.querySelector('.text__hashtags');
 const textDescription = form.querySelector('.text__description');
 const uploadInput = document.querySelector('#upload-file');
 
+form.addEventListener('keydown', (evt) => {
+  if (document.activeElement === textHashtags || document.activeElement === textDescription) {
+    evt.stopPropagation();
+  }
+});
+
 const {openPopup} = initPopup(uploadOverlayElement, {
   onClose: () => {
     uploadInput.value = '';
+    resetEffects();
   }
 });
 
