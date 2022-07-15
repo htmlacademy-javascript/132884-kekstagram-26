@@ -21,7 +21,7 @@ export const initPopup = (element, {closeSelector = '.cancel', hiddenClass = 'hi
     element.classList.add(hiddenClass);
     document.body.style.overflow = 'hidden';
     removeCloseHandlers();
-    if(onclose) {
+    if(onClose) {
       onClose();
     }
   };
