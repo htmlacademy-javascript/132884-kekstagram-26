@@ -1,14 +1,14 @@
-export const initPopup = (element, {closeSelector = '.cancel', hiddenClass = 'hidden', onClose} = {}) => {
+export const initPopup = (element, {closeSelector = '.cancel', hiddenClass = 'hidden', onClose, capture = false} = {}) => {
   const closeElement = element.querySelector(closeSelector);
 
   const addCloseHandlers = () => {
-    document.body.addEventListener('keydown', escapeCloseHandler);
-    closeElement.addEventListener('click', closeHandler);
+    document.body.addEventListener('keydown', escapeCloseHandler, capture);
+    closeElement?.removeEventListener('click', closeHandler);
   };
 
   const removeCloseHandlers = () => {
-    document.body.removeEventListener('keydown', escapeCloseHandler);
-    closeElement.removeEventListener('click', closeHandler);
+    document.body.removeEventListener('keydown', escapeCloseHandler, capture);
+    closeElement?.removeEventListener('click', closeHandler);
   };
 
   const openPopup = () => {
@@ -17,17 +17,17 @@ export const initPopup = (element, {closeSelector = '.cancel', hiddenClass = 'hi
     addCloseHandlers();
   };
 
-  const closePopup = () => {
+  const closePopup = (evt) => {
     element.classList.add(hiddenClass);
     document.body.style.overflow = 'hidden';
     removeCloseHandlers();
     if(onClose) {
-      onClose();
+      onClose(evt);
     }
   };
 
-  function closeHandler () {
-    closePopup();
+  function closeHandler (evt) {
+    closePopup(evt);
   }
 
   function escapeCloseHandler (evt) {

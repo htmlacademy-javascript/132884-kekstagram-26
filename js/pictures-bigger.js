@@ -62,7 +62,7 @@ const replaceComments = (comments) => {
   comentsCount.textContent = maxCount;
 };
 
-const {openPopup} = initPopup(bigPictureElement, {
+const {openPopup, closePopup} = initPopup(bigPictureElement, {
   onClose: () => {
     commentsLoader.removeEventListener('click', showNextCommentsPage);
   }
@@ -77,4 +77,4 @@ const showBigPicture = (item) => {
   socialCaption.textContent = item.description;
 };
 
-export {showBigPicture};
+export {showBigPicture, closePopup as closeBigPicture};

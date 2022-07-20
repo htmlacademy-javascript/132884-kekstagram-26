@@ -1,31 +1,32 @@
-const getData = async (onSuccess, onFail) => {
+import {showError} from './messages.js';
+
+const getData = async () => {
   try {
-    const responce = await fetch(
-      'https://26.javascript.pages.academy/kekstagram/data'
+    const response = await fetch(
+      'https://26.javascript.pages.academy/kekstagram/data',
     );
 
-    if (!responce.ok) {
-      throw new Error('Не удалось загрузить обьявления');
+    if (!response.ok) {
+      throw new Error('Не удалось загрузить фотографии');
     }
 
-    const offers = await responce.json();
-    onSuccess(offers);
+    return await response.json();
   } catch (error) {
-    onFail(error.message);
+    showError(error.message);
   }
 };
 
 const sendData = async (onSuccess, onFail, body) => {
   try {
-    const responce = await fetch(
-      'Не удалось загрузить обьявления',
+    const response = await fetch(
+      'https://26.javascript.pages.academy/kekstagram',
       {
         method: 'POST',
         body,
       }
     );
 
-    if (!responce.ok) {
+    if (!response.ok) {
       throw new Error('Не удалось отправить форму. Попробуйте еще раз.');
     }
 
