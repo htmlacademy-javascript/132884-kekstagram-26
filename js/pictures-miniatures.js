@@ -26,6 +26,7 @@ const createPictures = (items) => {
 };
 
 const drawPictures = (items) => {
+  picturesContainer.querySelectorAll('.picture').forEach((picture) => picture.remove());
   picturesContainer.append(createPictures(items));
 };
 
