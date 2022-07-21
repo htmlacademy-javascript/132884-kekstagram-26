@@ -1,5 +1,7 @@
+import {sendData} from './api.js';
 import {resetEffects} from './effects.js';
 import {initPopup} from './popup.js';
+import {showLoadError, showLoadSuccess} from './messages.js';
 
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
@@ -13,9 +15,10 @@ form.addEventListener('keydown', (evt) => {
   }
 });
 
-const {openPopup} = initPopup(uploadOverlayElement, {
+const {openPopup, closePopup} = initPopup(uploadOverlayElement, {
   onClose: () => {
     uploadInput.value = '';
+    form.reset();
     resetEffects();
   }
 });
@@ -60,8 +63,16 @@ window.onload = () => {
   pristine.addValidator(textDescription, (value) => value.length <= 140, 'Максимальная длинна 140 символов');
 
   form.addEventListener('submit', (evt) => {
-    if (!pristine.validate()) {
-      evt.preventDefault();
+    evt.preventDefault();
+    if (pristine.validate()) {
+      sendData(new FormData(form))
+        .then(() => {
+          closePopup();
+          showLoadSuccess();
+        })
+        .catch(() => {
+          showLoadError();
+        });
     }
   });
 };

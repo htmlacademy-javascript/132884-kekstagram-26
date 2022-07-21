@@ -1,7 +1,10 @@
-import {getPhotoCards} from './data.js';
 import './form.js';
 import './scale.js';
 import {drawPictures} from './pictures-miniatures.js';
+import {getData} from './api.js';
 
-const cards = getPhotoCards();
-drawPictures(cards);
+document.addEventListener('DOMContentLoaded', async () => {
+  const cards = await getData();
+  drawPictures(cards);
+});
+
