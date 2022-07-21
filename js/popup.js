@@ -3,12 +3,16 @@ export const initPopup = (element, {closeSelector = '.cancel', hiddenClass = 'hi
 
   const addCloseHandlers = () => {
     document.body.addEventListener('keydown', escapeCloseHandler, capture);
-    closeElement?.removeEventListener('click', closeHandler);
+    if (closeElement) {
+      closeElement.addEventListener('click', closeHandler);
+    }
   };
 
   const removeCloseHandlers = () => {
     document.body.removeEventListener('keydown', escapeCloseHandler, capture);
-    closeElement?.removeEventListener('click', closeHandler);
+    if (closeElement) {
+      closeElement.removeEventListener('click', closeHandler);
+    }
   };
 
   const openPopup = () => {
@@ -33,7 +37,7 @@ export const initPopup = (element, {closeSelector = '.cancel', hiddenClass = 'hi
   function escapeCloseHandler (evt) {
     //evt.preventDefault();
     if(evt.key === 'Escape') {
-      closePopup();
+      closePopup(evt);
     }
   }
 

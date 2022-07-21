@@ -16,24 +16,20 @@ const getData = async () => {
   }
 };
 
-const sendData = async (onSuccess, onFail, body) => {
-  try {
-    const response = await fetch(
-      'https://26.javascript.pages.academy/kekstagram',
-      {
-        method: 'POST',
-        body,
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error('Не удалось отправить форму. Попробуйте еще раз.');
+const sendData = async (body) => {
+  const response = await fetch(
+    'https://26.javascript.pages.academy/kekstagram2',
+    {
+      method: 'POST',
+      body,
     }
+  );
 
-    onSuccess();
-  } catch (error) {
-    onFail(error.message);
+  if (!response.ok) {
+    throw new Error('Не удалось отправить форму. Попробуйте еще раз.');
   }
+
+  return response;
 };
 
 export {getData, sendData};

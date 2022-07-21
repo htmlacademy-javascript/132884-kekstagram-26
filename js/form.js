@@ -65,15 +65,14 @@ window.onload = () => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     if (pristine.validate()) {
-      sendData(() => {
-        closePopup();
-        showLoadSuccess('Удачная загрузка');
-      }, (message) => {
-        uploadOverlayElement.classList.add('hidden');
-        showLoadError(message, () => {
-          uploadOverlayElement.classList.remove('hidden');
+      sendData(new FormData(form))
+        .then(() => {
+          closePopup();
+          showLoadSuccess();
+        })
+        .catch(() => {
+          showLoadError();
         });
-      }, new FormData(form));
     }
   });
 };
