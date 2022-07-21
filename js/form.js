@@ -23,8 +23,15 @@ const {openPopup, closePopup} = initPopup(uploadOverlayElement, {
   }
 });
 
+const imgUploadPreview = document.querySelector('.img-upload__preview img');
+
 const showUploadForm = () => {
   openPopup();
+  imgUploadPreview.src = URL.createObjectURL(uploadInput.files[0]);
+
+  document.querySelectorAll('.effects__preview').forEach((effectPreview) => {
+    effectPreview.style.backgroundImage = `url(${imgUploadPreview.src})`;
+  });
 };
 
 const hashTagFormat = new RegExp('^#[A-Za-zА-Яа-яËё0-9]{1,19}$');
