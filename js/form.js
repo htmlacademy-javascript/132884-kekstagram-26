@@ -2,6 +2,7 @@ import {sendData} from './api.js';
 import {resetEffects} from './effects.js';
 import {initPopup} from './popup.js';
 import {showLoadError, showLoadSuccess} from './messages.js';
+import {FILE_TYPES} from './constants.js';
 
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
@@ -85,7 +86,15 @@ window.onload = () => {
 };
 
 uploadInput.addEventListener('change', () => {
-  showUploadForm();
+  const file = uploadInput.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    showUploadForm();
+    imgUploadPreview.src = URL.createObjectURL(uploadInput.files[0]);
+  }
 });
 
 export {showUploadForm};

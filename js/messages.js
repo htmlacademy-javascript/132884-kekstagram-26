@@ -11,7 +11,7 @@ const showError = (message) => {
 };
 
 const initMessage = (element, {buttonClass}) => {
-  element.style.zIndex = 1000;
+  element.style.zIndex = '1000';
 
   const {openPopup, closePopup} = initPopup(element, {
     closeSelector: buttonClass,
