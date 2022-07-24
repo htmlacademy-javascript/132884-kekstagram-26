@@ -30,6 +30,7 @@ const getPhotoCard = () => {
   };
 };
 
+//eslint-disable-next-line
 const getPhotoCards = () => Array.from({length: PHOTO_COUNT}, getPhotoCard);
 
 export {getPhotoCards};
