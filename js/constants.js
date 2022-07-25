@@ -2,6 +2,14 @@ const TIMING = 500;
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
+const GET_RESPONCE_URL = 'https://26.javascript.pages.academy/kekstagram/data';
+const SEND_RESPONCE_URL = 'https://26.javascript.pages.academy/kekstagram2';
+
+const MAX_COMMENTS_COUNT = 30;
+const MIN_COMMENTS_COUNT = 15;
+const MAX_LIKES_COUNT = 25;
+const PHOTO_COUNT = 25;
+
 const NAMES = [
   'Константин',
   'Олег',
@@ -67,9 +75,4 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const MAX_COMMENTS_COUNT = 30;
-const MIN_COMMENTS_COUNT = 15;
-const MAX_LIKES_COUNT = 25;
-const PHOTO_COUNT = 25;
-
-export {NAMES,SURNAMES, MESSAGE, MAX_COMMENTS_COUNT, MIN_COMMENTS_COUNT, MAX_LIKES_COUNT, PHOTO_COUNT, TIMING, FILE_TYPES };
+export {NAMES, SURNAMES, MESSAGE, MAX_COMMENTS_COUNT, MIN_COMMENTS_COUNT, MAX_LIKES_COUNT, PHOTO_COUNT, TIMING, FILE_TYPES, GET_RESPONCE_URL, SEND_RESPONCE_URL};
