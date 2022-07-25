@@ -32,7 +32,7 @@ const initFilters = (cards, cb) => {
       case 'filter-random': {
         const shuffledCards = cards.slice();
         shuffle(shuffledCards);
-        cb(shuffledCards);
+        cb(shuffledCards.splice(0, 10));
         break;
       }
       case 'filter-default': {
