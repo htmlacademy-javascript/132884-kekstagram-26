@@ -1,9 +1,10 @@
 import {showError} from './messages.js';
+import {GET_RESPONCE_URL, SEND_RESPONCE_URL} from './constants.js';
 
 const getData = async () => {
   try {
     const response = await fetch(
-      'https://26.javascript.pages.academy/kekstagram/data',
+      GET_RESPONCE_URL,
     );
 
     if (!response.ok) {
@@ -18,7 +19,7 @@ const getData = async () => {
 
 const sendData = async (body) => {
   const response = await fetch(
-    'https://26.javascript.pages.academy/kekstagram',
+    SEND_RESPONCE_URL,
     {
       method: 'POST',
       body,

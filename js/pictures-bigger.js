@@ -1,6 +1,7 @@
 import {initPopup} from './popup.js';
 import './effects.js';
 
+
 const bigPictureElement = document.querySelector('.big-picture');
 
 const bigImage = bigPictureElement.querySelector('.big-picture__img img');
