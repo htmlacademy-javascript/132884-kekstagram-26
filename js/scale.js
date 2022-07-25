@@ -18,3 +18,10 @@ scaleElement.addEventListener('click', (evt) => {
   valueInputElement.value = `${numberValue}%`;
   imgUploadPreview.style.transform = `scale(${valueInputElement.value})`;
 });
+
+const resetZoom = () => {
+  valueInputElement.value = `${MAX}%`;
+  imgUploadPreview.style.transform = `scale(${valueInputElement.value})`;
+};
+
+export {resetZoom};

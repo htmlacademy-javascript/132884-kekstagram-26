@@ -3,6 +3,7 @@ import {resetEffects} from './effects.js';
 import {initPopup} from './popup.js';
 import {showLoadError, showLoadSuccess} from './messages.js';
 import {FILE_TYPES} from './constants.js';
+import {resetZoom} from './scale.js';
 
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
@@ -20,6 +21,7 @@ const {openPopup, closePopup} = initPopup(uploadOverlayElement, {
   onClose: () => {
     uploadInput.value = '';
     form.reset();
+    resetZoom();
     resetEffects();
   }
 });
