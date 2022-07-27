@@ -1,14 +1,5 @@
 import './pictures-bigger.js';
 
-const effectLevelElement = document.querySelector('.effect-level');
-const sliderElement = document.querySelector('.effect-level__slider');
-const imgUploadPreview = document.querySelector('.img-upload__preview img');
-const effectsElement = document.querySelector('.effects');
-const effectsRadioElements = document.querySelectorAll('.effects__radio');
-const effectValueInputElement = document.querySelector('.effect-level__value');
-
-let currentEffect = 'none';
-
 const EFFECTS = {
   chrome: {
     effect: 'grayscale',
@@ -36,6 +27,15 @@ const EFFECTS = {
     slider: {step: 0.1, min: 1, max: 3}
   }
 };
+
+const effectLevelElement = document.querySelector('.effect-level');
+const sliderElement = document.querySelector('.effect-level__slider');
+const imgUploadPreview = document.querySelector('.img-upload__preview img');
+const effectsElement = document.querySelector('.effects');
+const effectsRadioElements = document.querySelectorAll('.effects__radio');
+const effectValueInputElement = document.querySelector('.effect-level__value');
+
+let currentEffect = 'none';
 
 noUiSlider.create(sliderElement, {
   range: {
