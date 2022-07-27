@@ -1,10 +1,11 @@
 import {initPopup} from './popup.js';
+import {LOAD_COMMENTS} from './constants.js';
 import './effects.js';
 
 
 const bigPicture = document.querySelector('.big-picture');
 
-const bigImage = bigPicture.querySelector('.big-picture__img img');
+const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 const likesCount = bigPicture.querySelector('.likes-count');
 
 const socialComents = bigPicture.querySelector('.social__comments');
@@ -22,36 +23,35 @@ const clearComments = () => {
 };
 
 const createComment = (comment) => {
-  const commentElement = socialComent.cloneNode(true);
-  commentElement.querySelector('.social__picture').src = comment.avatar;
-  commentElement.querySelector('.social__picture').alt = comment.name;
-  commentElement.querySelector('.social__text').textContent = comment.message;
-  return commentElement;
+  const commentTemplate = socialComent.cloneNode(true);
+  commentTemplate.querySelector('.social__picture').src = comment.avatar;
+  commentTemplate.querySelector('.social__picture').alt = comment.name;
+  commentTemplate.querySelector('.social__text').textContent = comment.message;
+  return commentTemplate;
 };
 
 const createComments = (comments) => {
-  const commentElements = document.createDocumentFragment();
+  const commentsFragment = document.createDocumentFragment();
 
   comments.forEach((comment) => {
-    commentElements.append(createComment(comment));
+    commentsFragment.append(createComment(comment));
   });
 
-  return commentElements;
+  return commentsFragment;
 };
 
 let showNextCommentsPage;
 const replaceComments = (comments) => {
   clearComments();
   const maxCount = comments.length;
-  const onPage = 5;
-  const totalPages = Math.ceil(maxCount / onPage);
+  const totalPages = Math.ceil(maxCount / LOAD_COMMENTS);
   let page = 1;
 
   commentsLoader.classList.remove('hidden');
 
   showNextCommentsPage = () => {
-    socialComents.appendChild(createComments(comments.slice((page - 1) * onPage, onPage * page)));
-    socialCommentCount.textContent = `${Math.min(page * onPage, maxCount)} из ${maxCount} коментариев`;
+    socialComents.appendChild(createComments(comments.slice((page - 1) * LOAD_COMMENTS, LOAD_COMMENTS * page)));
+    socialCommentCount.textContent = `${Math.min(page * LOAD_COMMENTS, maxCount)} из ${maxCount} коментариев`;
     page++;
     if (page > totalPages) {
       commentsLoader.classList.add('hidden');
@@ -73,7 +73,7 @@ const showBigPicture = (item) => {
   openPopup();
   replaceComments(item.comments);
 
-  bigImage.src = item.url;
+  bigPictureImg.src = item.url;
   likesCount.textContent = item.likes;
   socialCaption.textContent = item.description;
 };
