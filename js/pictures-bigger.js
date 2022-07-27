@@ -44,7 +44,7 @@ const replaceComments = (comments) => {
   clearComments();
   const maxCount = comments.length;
   const onPage = 5;
-  const totalPages = Math.ceil(maxCount / 5);
+  const totalPages = Math.ceil(maxCount / onPage);
   let page = 1;
 
   commentsLoader.classList.remove('hidden');
@@ -63,7 +63,7 @@ const replaceComments = (comments) => {
   comentsCount.textContent = maxCount;
 };
 
-const {openPopup, closePopup} = initPopup(bigPictureElement, {
+const {openPopup} = initPopup(bigPictureElement, {
   onClose: () => {
     commentsLoader.removeEventListener('click', showNextCommentsPage);
   }
@@ -78,4 +78,4 @@ const showBigPicture = (item) => {
   socialCaption.textContent = item.description;
 };
 
-export {showBigPicture, closePopup as closeBigPicture};
+export {showBigPicture};

@@ -1,10 +1,10 @@
-const imgUploadPreview = document.querySelector('.img-upload__preview');
-const scaleElement = document.querySelector('.scale');
-const valueInputElement = document.querySelector('.scale__control--value');
-
 const STEP = 25;
 const MIN = 25;
 const MAX = 100;
+
+const imgUploadPreview = document.querySelector('.img-upload__preview');
+const scaleElement = document.querySelector('.scale');
+const valueInputElement = document.querySelector('.scale__control--value');
 
 scaleElement.addEventListener('click', (evt) => {
   const value = valueInputElement.value.split('%').shift();
