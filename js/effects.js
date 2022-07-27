@@ -52,7 +52,7 @@ const resetEffects = () => {
   imgUploadPreview.style.filter = '';
   effectLevelElement.classList.add('hidden');
 
-  effectsRadioElements.forEach((effectsRadioElement, index) => {
+  effectsRadioElements.forEach((index) => {
     effectsRadioElements.checked = index === 0;
   });
 };

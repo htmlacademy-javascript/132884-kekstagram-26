@@ -2,15 +2,15 @@ import {initPopup} from './popup.js';
 import './effects.js';
 
 
-const bigPictureElement = document.querySelector('.big-picture');
+const bigPicture = document.querySelector('.big-picture');
 
-const bigImage = bigPictureElement.querySelector('.big-picture__img img');
-const likesCount = bigPictureElement.querySelector('.likes-count');
+const bigImage = bigPicture.querySelector('.big-picture__img img');
+const likesCount = bigPicture.querySelector('.likes-count');
 
-const socialComents = bigPictureElement.querySelector('.social__comments');
-const socialComent = bigPictureElement.querySelector('.social__comment').cloneNode(true);
-const comentsCount = bigPictureElement.querySelector('.comments-count');
-const socialCaption = bigPictureElement.querySelector('.social__caption');
+const socialComents = bigPicture.querySelector('.social__comments');
+const socialComent = bigPicture.querySelector('.social__comment').cloneNode(true);
+const comentsCount = bigPicture.querySelector('.comments-count');
+const socialCaption = bigPicture.querySelector('.social__caption');
 
 const socialCommentCount = document.querySelector('.social__comment-count');
 const commentsLoader = document.querySelector('.comments-loader');
@@ -63,7 +63,7 @@ const replaceComments = (comments) => {
   comentsCount.textContent = maxCount;
 };
 
-const {openPopup} = initPopup(bigPictureElement, {
+const {openPopup} = initPopup(bigPicture, {
   onClose: () => {
     commentsLoader.removeEventListener('click', showNextCommentsPage);
   }
