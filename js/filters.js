@@ -1,18 +1,18 @@
 import {shuffle, throttle} from './util.js';
 import {TIMING} from './constants.js';
 
-const filtersElement = document.querySelector('.img-filters');
-const formElement = filtersElement.querySelector('.img-filters__form');
-const formButtons = filtersElement.querySelectorAll('.img-filters__button');
+const imgFilters = document.querySelector('.img-filters');
+const imgFiltersForm = imgFilters.querySelector('.img-filters__form');
+const imgFiltersButton = imgFilters.querySelectorAll('.img-filters__button');
 
 
 const initFilters = (cards, cb) => {
-  filtersElement.classList.remove('img-filters--inactive');
+  imgFilters.classList.remove('img-filters--inactive');
 
   const doFiltering = throttle((element) => {
 
     if (element.target) {
-      formButtons.forEach((formButton) => {
+      imgFiltersButton.forEach((formButton) => {
         if (formButton !== element.target) {
           formButton.classList.remove('img-filters__button--active');
         } else {
@@ -41,7 +41,7 @@ const initFilters = (cards, cb) => {
     }
   }, TIMING);
 
-  formElement.addEventListener('click', doFiltering);
+  imgFiltersForm.addEventListener('click', doFiltering);
   cb(cards);
 };
 
