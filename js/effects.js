@@ -28,16 +28,16 @@ const EFFECTS = {
   }
 };
 
-const effectLevelElement = document.querySelector('.effect-level');
-const sliderElement = document.querySelector('.effect-level__slider');
+const effectLevel = document.querySelector('.effect-level');
+const slider = document.querySelector('.effect-level__slider');
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
-const effectsElement = document.querySelector('.effects');
-const effectsRadioElements = document.querySelectorAll('.effects__radio');
-const effectValueInputElement = document.querySelector('.effect-level__value');
+const effects = document.querySelector('.effects');
+const effectsRadio = document.querySelectorAll('.effects__radio');
+const effectValueInput = document.querySelector('.effect-level__value');
 
 let currentEffect = 'none';
 
-noUiSlider.create(sliderElement, {
+noUiSlider.create(slider, {
   range: {
     min: 0,
     max: 100,
@@ -50,33 +50,33 @@ noUiSlider.create(sliderElement, {
 
 const resetEffects = () => {
   imgUploadPreview.style.filter = '';
-  effectLevelElement.classList.add('hidden');
+  effectLevel.classList.add('hidden');
 
-  effectsRadioElements.forEach((index) => {
-    effectsRadioElements.checked = index === 0;
+  effectsRadio.forEach((effectsRadioElement, index) => {
+    effectsRadio.checked = index === 0;
   });
 };
 
-sliderElement.noUiSlider.on('update', () => {
-  effectValueInputElement.value = sliderElement.noUiSlider.get();
+slider.noUiSlider.on('update', () => {
+  effectValueInput.value = slider.noUiSlider.get();
 
   if (currentEffect in EFFECTS) {
     const effect = EFFECTS[currentEffect];
 
-    imgUploadPreview.style.filter = `${effect.effect}(${effectValueInputElement.value}${effect.unit})`;
+    imgUploadPreview.style.filter = `${effect.effect}(${effectValueInput.value}${effect.unit})`;
   } else {
     resetEffects();
   }
 });
 
-effectsElement.addEventListener('change', (evt) => {
+effects.addEventListener('change', (evt) => {
   currentEffect = evt.target.id.split('-').pop();
 
   if (currentEffect in EFFECTS) {
     const effect = EFFECTS[currentEffect];
 
-    effectLevelElement.classList.remove('hidden');
-    sliderElement.noUiSlider.updateOptions({
+    effectLevel.classList.remove('hidden');
+    slider.noUiSlider.updateOptions({
       range: {
         min: effect.slider.min,
         max: effect.slider.max,

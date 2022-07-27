@@ -5,7 +5,7 @@ import {showLoadError, showLoadSuccess} from './messages.js';
 import {FILE_TYPES} from './constants.js';
 import {resetZoom} from './scale.js';
 
-const uploadOverlayElement = document.querySelector('.img-upload__overlay');
+const uploadOverlay = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('.img-upload__form');
 const textHashtags = form.querySelector('.text__hashtags');
 const textDescription = form.querySelector('.text__description');
@@ -17,7 +17,7 @@ form.addEventListener('keydown', (evt) => {
   }
 });
 
-const {openPopup, closePopup} = initPopup(uploadOverlayElement, {
+const {openPopup, closePopup} = initPopup(uploadOverlay, {
   onClose: () => {
     uploadInput.value = '';
     form.reset();

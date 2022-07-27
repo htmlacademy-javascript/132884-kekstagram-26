@@ -3,11 +3,11 @@ const MIN = 25;
 const MAX = 100;
 
 const imgUploadPreview = document.querySelector('.img-upload__preview');
-const scaleElement = document.querySelector('.scale');
-const valueInputElement = document.querySelector('.scale__control--value');
+const scale = document.querySelector('.scale');
+const valueInput = document.querySelector('.scale__control--value');
 
-scaleElement.addEventListener('click', (evt) => {
-  const value = valueInputElement.value.split('%').shift();
+scale.addEventListener('click', (evt) => {
+  const value = valueInput.value.split('%').shift();
   let numberValue = Number(value);
 
   if (evt.target.classList.contains('scale__control--smaller')) {
@@ -15,13 +15,13 @@ scaleElement.addEventListener('click', (evt) => {
   } else if (evt.target.classList.contains('scale__control--bigger')) {
     numberValue = Math.min(numberValue + STEP, MAX);
   }
-  valueInputElement.value = `${numberValue}%`;
-  imgUploadPreview.style.transform = `scale(${valueInputElement.value})`;
+  valueInput.value = `${numberValue}%`;
+  imgUploadPreview.style.transform = `scale(${valueInput.value})`;
 });
 
 const resetZoom = () => {
-  valueInputElement.value = `${MAX}%`;
-  imgUploadPreview.style.transform = `scale(${valueInputElement.value})`;
+  valueInput.value = `${MAX}%`;
+  imgUploadPreview.style.transform = `scale(${valueInput.value})`;
 };
 
 export {resetZoom};

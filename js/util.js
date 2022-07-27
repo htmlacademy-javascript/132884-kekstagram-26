@@ -5,7 +5,7 @@ const getRandomPositiveInteger = (min, max) => {
   return Math.floor(result);
 };
 
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+const getRandomArray = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
 class RandomGenerator {
   constructor(length) {
@@ -35,4 +35,4 @@ const throttle = (cb, ms) => {
   };
 };
 
-export {getRandomPositiveInteger, getRandomArrayElement, RandomGenerator, shuffle, throttle};
+export {getRandomPositiveInteger, getRandomArray, RandomGenerator, shuffle, throttle};
